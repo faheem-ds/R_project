@@ -57,3 +57,21 @@ q5 <- payment_staff[, .(
 
 print(q5)
 
+#Q6
+# Ensure IDs are integers
+film[, film_id := as.integer(film_id)]
+inventory[, film_id := as.integer(film_id)]
+inventory[, inventory_id := as.integer(inventory_id)]
+rental[, inventory_id := as.integer(inventory_id)]
+
+rented_films <- unique(inventory[rental, on = "inventory_id", film_id])
+
+all_films <- unique(film$film_id)
+
+films_not_rented <- setdiff(all_films, rented_films)
+
+q6 <- film[film_id %in% films_not_rented, .(film_id, title)]
+
+print(q6)
+
+
