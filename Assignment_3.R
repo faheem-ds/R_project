@@ -31,3 +31,15 @@ q3 <- film_lang[, .(total_films = .N), by = name]  # 'name' column from language
 print(q3)
 
 
+#Q4
+# Join customer with store to get store info
+cust_store <- merge(customer, store, by.x = "store_id", by.y = "store_id", all.x = TRUE)
+
+# Select customer full name and store info
+q4 <- cust_store[, .(customer_name = paste(first_name, last_name), store_id)]
+
+# Show results
+print(q4)
+
+
+
