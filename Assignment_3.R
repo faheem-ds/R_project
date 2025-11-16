@@ -20,3 +20,14 @@ q2 <- film[, .(avg_rental_rate = mean(rental_rate)), by = rating]
 # Show results in console
 print(q2)
 
+#Q3
+# Join film with language to get language names
+film_lang <- merge(film, language, by.x = "language_id", by.y = "language_id", all.x = TRUE)
+
+# Count total films per language
+q3 <- film_lang[, .(total_films = .N), by = name]  # 'name' column from language
+
+# Show results
+print(q3)
+
+
