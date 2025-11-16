@@ -42,4 +42,18 @@ q4 <- cust_store[, .(customer_name = paste(first_name, last_name), store_id)]
 print(q4)
 
 
+#Q5
+payment[, staff_id := as.integer(trimws(staff_id))]
+staff[, staff_id := as.integer(trimws(staff_id))]
+
+payment_staff <- merge(payment, staff, by = "staff_id", all.x = TRUE)
+
+q5 <- payment_staff[, .(
+  payment_id,
+  amount,
+  payment_date,
+  staff_name = ifelse(is.na(first_name), "Unknown Staff", paste(first_name, last_name))
+)]
+
+print(q5)
 
