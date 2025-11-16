@@ -74,4 +74,16 @@ q6 <- film[film_id %in% films_not_rented, .(film_id, title)]
 
 print(q6)
 
+#Q7
+library(ggplot2)
+# Count films per rating
+q7 <- film[, .N, by = rating]  # N = count of films per rating
+
+# Plot using ggplot2
+ggplot(q7, aes(x = rating, y = N, fill = rating)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Number of Films per Rating",
+       x = "Rating", y = "Number of Films") +
+  theme_minimal()
+
 
